@@ -1,10 +1,3 @@
-'''
-#################################################
-Reference:
-https://www.sbert.net/docs/quickstart.html
-https://raw.githubusercontent.com/milvus-io/pymilvus/0.4.0/examples/example.py
-#################################################
-'''
 import random
 import numpy as np
 import argparse
@@ -18,10 +11,6 @@ from sentence_transformers import SentenceTransformer
 _HOST = '127.0.0.1'
 _PORT = '19530'  # default value
 # _PORT = '19121'  # default http value
-
-# Vector parameters
-_DIM = 768  # dimension of vector
-
 _INDEX_FILE_SIZE = 32  # max file size of stored index
 
 
@@ -153,10 +142,14 @@ if __name__ == '__main__':
                         default='./data/query_data')
     parser.add_argument("--pretrained_sentence_transformer_model", help="the pretrained model name",
                         default='paraphrase-distilroberta-base-v1')
+    parser.add_argument("--dim", help="the dimension of embedding",
+                        default=768, type=int)
     args = parser.parse_args()
     model = SentenceTransformer(args.pretrained_sentence_transformer_model)
     # Index those sentences to milvus for query
     index_sentences = [line for line in open(args.index_data, 'r')]
     # sentences are used to generate query vector
     query_sentences = [line for line in open(args.query_data, 'r')]
+    # Vector parameters
+    _DIM = args.dim  # dimension of vector
     main()
