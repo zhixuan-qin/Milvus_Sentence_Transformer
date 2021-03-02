@@ -23,7 +23,8 @@ Steps of setting Milvus in Ubuntu VM:
       1. index_data: contains text data for creating the Milvus data collection
       2. query_data: use the text in the file to make the query
       3. pretrained_sentence_transformer_model: the name of pretrained sentence transformer model for text embedding
-    2. python3 example.py --index_data './data/index_data' --query_data './data/query_data' --pretrained_sentence_transformer_model 'paraphrase-distilroberta-base-v1'
+      4. dim: the dimension of embedding
+    2. python3 milvus_sentence_transformer.py --index_data './data/index_data' --query_data './data/query_data' --pretrained_sentence_transformer_model 'paraphrase-distilroberta-base-v1' --dim 768
     3. Return: the search results for given queries
 
 Return example:
